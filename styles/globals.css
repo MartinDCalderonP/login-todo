@@ -1,7 +1,7 @@
 @import url("https://fonts.googleapis.com/css2?family=Nunito+Sans&display=swap");
 
 :root {
-  --darkBackgroundColor: #1e1e1e;
+  --darkBackground: #1e1e1e;
 }
 
 html,
@@ -27,6 +27,6 @@ a {
 
   body {
     color: white;
-    background: var(--darkBackgroundColor);
+    background: var(--darkBackground);
   }
 }
