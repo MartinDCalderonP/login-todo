@@ -24,14 +24,16 @@ const Input = ({
 
   const isAValidEmail = (email: string) => {
     const regex = /\S+@\S+\.\S+/;
-
     const maxLength = 50;
 
     return regex.test(email) && email.length <= maxLength;
   };
 
   const isAValidPassword = (password: string) => {
-    return password.length >= 4;
+    const minLength = 4;
+    const maxLength = 16;
+
+    return password.length >= minLength && password.length <= maxLength;
   };
 
   const changeInputColor = useCallback((name: string, value: string) => {
