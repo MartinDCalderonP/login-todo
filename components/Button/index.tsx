@@ -1,5 +1,5 @@
 import { ReactNode, MouseEvent } from "react";
-import { ButtonDefault } from "./styles";
+import { DefaultButton } from "./styles";
 
 type ButtonType = "submit" | "reset" | "button";
 
@@ -12,9 +12,9 @@ interface IButton {
 
 const Button = ({ children, disabled, onClick, type }: IButton) => {
   return (
-    <ButtonDefault type={type} disabled={disabled} onClick={onClick}>
+    <DefaultButton type={type} disabled={disabled} onClick={onClick}>
       {children}
-    </ButtonDefault>
+    </DefaultButton>
   );
 };
 
