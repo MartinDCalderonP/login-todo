@@ -25,7 +25,9 @@ const Input = ({
   const isAValidEmail = (email: string) => {
     const regex = /\S+@\S+\.\S+/;
 
-    return regex.test(email);
+    const maxLength = 50;
+
+    return regex.test(email) && email.length <= maxLength;
   };
 
   const isAValidPassword = (password: string) => {
