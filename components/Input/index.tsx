@@ -3,23 +3,26 @@ import ErrorMessage from "components/ErrorMessage";
 import { DefaultInput, InputContainer, InputWrapper } from "./styles";
 
 interface IInput {
-  icon: JSX.Element;
   disableFormButton: (value: string, validInput: boolean) => void;
+  icon: JSX.Element;
   label: string;
   name: string;
   placeholder: string;
+  setValue: (name: string, value: string) => void;
   type: string;
+  value: string;
 }
 
 const Input = ({
-  icon,
   disableFormButton,
+  icon,
   label,
   name,
   placeholder,
+  setValue,
   type,
+  value,
 }: IInput) => {
-  const [value, setValue] = useState("");
   const [validInput, setValidInput] = useState(true);
 
   const isAValidEmail = (email: string) => {
@@ -51,9 +54,9 @@ const Input = ({
   }, []);
 
   const handleInputChange = (e: ChangeEvent<HTMLInputElement>) => {
-    const { value } = e.target;
+    const { name, value } = e.target;
 
-    setValue(value);
+    setValue(name, value);
   };
 
   useEffect(() => {
