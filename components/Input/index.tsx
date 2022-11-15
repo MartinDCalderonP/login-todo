@@ -64,6 +64,15 @@ const Input = ({
     disableFormButton(value, validInput);
   }, [value, disableFormButton, validInput]);
 
+  const currentErrorMessage = () => {
+    const errorMessages = {
+      email: "Not a valid email",
+      password: "Not a valid password",
+    };
+
+    return errorMessages[name as keyof typeof errorMessages];
+  };
+
   return (
     <InputContainer key={name}>
       <label htmlFor={name}>{label}</label>
@@ -81,9 +90,7 @@ const Input = ({
         />
       </InputWrapper>
 
-      {name === "email" && !validInput && (
-        <ErrorMessage message="Not a valid email" />
-      )}
+      {!validInput && <ErrorMessage message={currentErrorMessage()} />}
     </InputContainer>
   );
 };
