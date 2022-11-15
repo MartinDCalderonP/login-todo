@@ -15,8 +15,7 @@ export const DefaultButton = styled.button`
   box-shadow: 2px 2px 2px 0 rgba(0, 0, 0, 0.9);
 
   &:disabled {
-    color: darkgray;
-    box-shadow: 2px 2px 2px 0 darkgray;
+    opacity: 0.5;
 
     &:hover {
       transform: none;
