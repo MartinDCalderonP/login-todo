@@ -5,7 +5,6 @@ import useFetch from "hooks/useFetch";
 import Button from "components/Button";
 import ErrorMessage from "components/ErrorMessage";
 import Input from "components/Input";
-import { LoginContainer } from "./styles";
 
 const inputs = [
   {
@@ -26,7 +25,7 @@ const inputs = [
 
 const loginUrl = "http://dev.rapptrlabs.com/Tests/scripts/user-login.php";
 
-const Login = () => {
+const LoginForm = () => {
   const [loginParams, setLoginParams] = useState({
     email: "",
     password: "",
@@ -73,37 +72,33 @@ const Login = () => {
   }, [data, router]);
 
   return (
-    <LoginContainer>
-      <h1>Rapptr Labs</h1>
+    <form>
+      {inputs?.map((input) => (
+        <Input
+          key={input.name}
+          disableFormButton={handleDisableLoginButton}
+          value={loginParams[input.name as keyof typeof loginParams]}
+          setValue={handleLoginParamsChange}
+          {...input}
+        />
+      ))}
 
-      <form>
-        {inputs?.map((input) => (
-          <Input
-            key={input.name}
-            disableFormButton={handleDisableLoginButton}
-            value={loginParams[input.name as keyof typeof loginParams]}
-            setValue={handleLoginParamsChange}
-            {...input}
-          />
-        ))}
+      <Button
+        type="submit"
+        disabled={loginButtonDisabled || loading}
+        onClick={handleLoginButtonClick}
+      >
+        Login
+      </Button>
 
-        <Button
-          type="submit"
-          disabled={loginButtonDisabled || loading}
-          onClick={handleLoginButtonClick}
-        >
-          Login
-        </Button>
-
-        {error && (
-          <ErrorMessage
-            message="The server could not be reached. Please try again later."
-            textAlign="center"
-          />
-        )}
-      </form>
-    </LoginContainer>
+      {error && (
+        <ErrorMessage
+          message="The server could not be reached. Please try again later."
+          textAlign="center"
+        />
+      )}
+    </form>
   );
 };
 
-export default Login;
+export default LoginForm;
