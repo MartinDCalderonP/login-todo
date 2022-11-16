@@ -1,5 +1,6 @@
 import Head from "next/head";
-import Login from "components/Login";
+import LoginForm from "components/LoginForm";
+import { MainContainer } from "./styles";
 
 const Home = () => {
   return (
@@ -10,9 +11,10 @@ const Home = () => {
         <link rel="icon" href="/favicon.ico" />
       </Head>
 
-      <main>
-        <Login />
-      </main>
+      <MainContainer>
+        <h1>Rapptr Labs</h1>
+        <LoginForm />
+      </MainContainer>
     </>
   );
 };
