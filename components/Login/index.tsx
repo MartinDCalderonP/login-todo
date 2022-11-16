@@ -1,4 +1,5 @@
 import { MouseEvent, useEffect, useState } from "react";
+import { useRouter } from "next/router";
 import { FaUser, FaLock } from "react-icons/fa";
 import useFetch from "hooks/useFetch";
 import Button from "components/Button";
@@ -63,7 +64,13 @@ const Login = () => {
     fetchOptions: RequestInit;
   }>(fetchUrl, fetchOptions);
 
-  console.log(data, loading, error);
+  const router = useRouter();
+
+  useEffect(() => {
+    if (data && "user_id" in data) {
+      router.push("/list");
+    }
+  }, [data, router]);
 
   return (
     <LoginContainer>
