@@ -1,7 +1,8 @@
-import { MouseEvent, useState } from "react";
+import { MouseEvent, useEffect, useState } from "react";
 import { FaUser, FaLock } from "react-icons/fa";
 import useFetch from "hooks/useFetch";
 import Button from "components/Button";
+import ErrorMessage from "components/ErrorMessage";
 import Input from "components/Input";
 import { LoginContainer } from "./styles";
 
@@ -86,6 +87,13 @@ const Login = () => {
         >
           Login
         </Button>
+
+        {error && (
+          <ErrorMessage
+            message="The server could not be reached. Please try again later."
+            textAlign="center"
+          />
+        )}
       </form>
     </LoginContainer>
   );
