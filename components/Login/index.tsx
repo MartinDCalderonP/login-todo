@@ -1,6 +1,6 @@
 import { MouseEvent, useState } from "react";
 import { FaUser, FaLock } from "react-icons/fa";
-import useFetch from "hooks/useEffect";
+import useFetch from "hooks/useFetch";
 import Button from "components/Button";
 import Input from "components/Input";
 import { LoginContainer } from "./styles";
