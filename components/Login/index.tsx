@@ -1,0 +1,94 @@
+import { MouseEvent, useState } from "react";
+import { FaUser, FaLock } from "react-icons/fa";
+import useFetch from "hooks/useEffect";
+import Button from "components/Button";
+import Input from "components/Input";
+import { LoginContainer } from "./styles";
+
+const inputs = [
+  {
+    icon: <FaUser />,
+    label: "Email",
+    name: "email",
+    placeholder: "user@rapptrlabs.com",
+    type: "text",
+  },
+  {
+    icon: <FaLock />,
+    label: "Password",
+    name: "password",
+    placeholder: "Must be at least 4 characters",
+    type: "password",
+  },
+];
+
+const loginUrl = "http://dev.rapptrlabs.com/Tests/scripts/user-login.php";
+
+const Login = () => {
+  const [loginParams, setLoginParams] = useState({
+    email: "",
+    password: "",
+  });
+
+  const handleLoginParamsChange = (name: string, value: string) => {
+    setLoginParams({ ...loginParams, [name]: value });
+  };
+
+  const [loginButtonDisabled, setLoginButtonDisabled] = useState(true);
+
+  const handleDisableLoginButton = (value: string, validInput: boolean) => {
+    if (value.length > 0 && validInput) {
+      setLoginButtonDisabled(false);
+    } else {
+      setLoginButtonDisabled(true);
+    }
+  };
+
+  const [fetchUrl, setFetchUrl] = useState("");
+  const [fetchOptions, setFetchOptions] = useState({});
+
+  const handleLoginButtonClick = (e: MouseEvent<HTMLButtonElement>) => {
+    e.preventDefault();
+
+    setFetchUrl(loginUrl);
+    setFetchOptions({
+      method: "POST",
+      body: new URLSearchParams(loginParams),
+    });
+  };
+
+  const { data, loading, error } = useFetch<{
+    fetchUrl: string;
+    fetchOptions: RequestInit;
+  }>(fetchUrl, fetchOptions);
+
+  console.log(data, loading, error);
+
+  return (
+    <LoginContainer>
+      <h1>Rapptr Labs</h1>
+
+      <form>
+        {inputs?.map((input) => (
+          <Input
+            key={input.name}
+            disableFormButton={handleDisableLoginButton}
+            value={loginParams[input.name as keyof typeof loginParams]}
+            setValue={handleLoginParamsChange}
+            {...input}
+          />
+        ))}
+
+        <Button
+          type="submit"
+          disabled={loginButtonDisabled || loading}
+          onClick={handleLoginButtonClick}
+        >
+          Login
+        </Button>
+      </form>
+    </LoginContainer>
+  );
+};
+
+export default Login;
