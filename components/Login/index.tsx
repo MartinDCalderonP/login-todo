@@ -68,7 +68,7 @@ const Login = () => {
 
   useEffect(() => {
     if (data && "user_id" in data) {
-      router.push("/list");
+      router.push("/to-do-list");
     }
   }, [data, router]);
 
