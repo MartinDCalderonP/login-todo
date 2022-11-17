@@ -8,7 +8,7 @@ interface IButton {
   children: ReactNode;
   disabled?: boolean;
   onClick?: (e: MouseEvent<HTMLButtonElement>) => void;
-  type: ButtonType;
+  type?: ButtonType;
   variant?: ButtonVariant;
 }
 
