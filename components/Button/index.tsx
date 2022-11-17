@@ -2,17 +2,30 @@ import { ReactNode, MouseEvent } from "react";
 import { DefaultButton } from "./styles";
 
 type ButtonType = "submit" | "reset" | "button";
+export type ButtonVariant = "default" | "white";
 
 interface IButton {
   children: ReactNode;
   disabled?: boolean;
   onClick?: (e: MouseEvent<HTMLButtonElement>) => void;
   type: ButtonType;
+  variant?: ButtonVariant;
 }
 
-const Button = ({ children, disabled, onClick, type }: IButton) => {
+const Button = ({
+  children,
+  disabled,
+  onClick,
+  type,
+  variant = "default",
+}: IButton) => {
   return (
-    <DefaultButton type={type} disabled={disabled} onClick={onClick}>
+    <DefaultButton
+      disabled={disabled}
+      onClick={onClick}
+      type={type}
+      variant={variant}
+    >
       {children}
     </DefaultButton>
   );

@@ -1,12 +1,18 @@
 import styled from "@emotion/styled";
+import { ButtonVariant } from "../Button";
 
-export const DefaultButton = styled.button`
+interface IDefaultButton {
+  variant: ButtonVariant;
+}
+
+export const DefaultButton = styled("button")<IDefaultButton>`
   width: 100%;
   margin-top: 1rem;
-  background-color: var(--defaultButton);
+  background-color: ${({ variant }) =>
+    variant === "default" ? "#000" : "#fff"};
+  color: ${({ variant }) => (variant === "default" ? "#fff" : "#000")};
   border: none;
   border-radius: 4px;
-  color: #fff;
   cursor: pointer;
   font-size: 1rem;
   font-weight: 600;
