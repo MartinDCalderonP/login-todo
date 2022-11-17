@@ -16,7 +16,7 @@ const Button = ({
   children,
   disabled,
   onClick,
-  type,
+  type = "button",
   variant = "default",
 }: IButton) => {
   return (
