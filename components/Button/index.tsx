@@ -2,7 +2,7 @@ import { ReactNode, MouseEvent } from "react";
 import { DefaultButton } from "./styles";
 
 type ButtonType = "submit" | "reset" | "button";
-export type ButtonVariant = "default" | "white";
+export type ButtonVariant = "default" | "white" | "black";
 
 interface IButton {
   children: ReactNode;

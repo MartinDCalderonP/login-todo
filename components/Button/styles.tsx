@@ -5,11 +5,30 @@ interface IDefaultButton {
   variant: ButtonVariant;
 }
 
+const currentButtonVariant = (variant: ButtonVariant) => {
+  const variants = {
+    default: {
+      backgroundColor: "var(--defaultButton)",
+      color: "#fff",
+    },
+    white: {
+      backgroundColor: "#fff",
+      color: "#000",
+    },
+    black: {
+      backgroundColor: "#000",
+      color: "#fff",
+    },
+  };
+
+  return variants[variant];
+};
+
 export const DefaultButton = styled("button")<IDefaultButton>`
-  width: 100%;
   background-color: ${({ variant }) =>
-    variant === "default" ? "var(--defaultButton)" : "#fff"};
-  color: ${({ variant }) => (variant === "default" ? "#fff" : "#000")};
+    currentButtonVariant(variant).backgroundColor};
+  color: ${({ variant }) => currentButtonVariant(variant).color};
+  width: 100%;
   border: none;
   border-radius: 4px;
   cursor: pointer;
