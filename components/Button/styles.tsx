@@ -7,7 +7,6 @@ interface IDefaultButton {
 
 export const DefaultButton = styled("button")<IDefaultButton>`
   width: 100%;
-  margin-top: 1rem;
   background-color: ${({ variant }) =>
     variant === "default" ? "var(--defaultButton)" : "#fff"};
   color: ${({ variant }) => (variant === "default" ? "#fff" : "#000")};
