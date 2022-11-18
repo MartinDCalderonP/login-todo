@@ -49,35 +49,31 @@ const ToDoList = ({
   };
 
   const deleteToDo = (id: number) => {
-    const newToDoList = toDoList.filter((toDo: ToDo) => toDo.id !== id);
+    const newToDoList = toDoList?.filter((toDo: ToDo) => toDo.id !== id);
 
     setToDoList(newToDoList);
   };
 
   return (
-    <>
-      {currentToDoList?.length > 0 && (
-        <ToDoUnorderedList>
-          {addToDo && (
-            <AddToDo
-              editToDo={editToDo}
-              handleCloseAddToDo={handleCloseAddToDo}
-              setToDoList={setToDoList}
-              toDoList={toDoList}
-            />
-          )}
-          {currentToDoList?.map(({ id, value }) => (
-            <ToDoListItem
-              key={id}
-              deleteToDo={deleteToDo}
-              handleEditToDo={handleEditToDo}
-              id={id}
-              text={value}
-            />
-          ))}
-        </ToDoUnorderedList>
+    <ToDoUnorderedList>
+      {addToDo && (
+        <AddToDo
+          editToDo={editToDo}
+          handleCloseAddToDo={handleCloseAddToDo}
+          setToDoList={setToDoList}
+          toDoList={toDoList}
+        />
       )}
-    </>
+      {currentToDoList?.map(({ id, value }) => (
+        <ToDoListItem
+          key={id}
+          deleteToDo={deleteToDo}
+          handleEditToDo={handleEditToDo}
+          id={id}
+          text={value}
+        />
+      ))}
+    </ToDoUnorderedList>
   );
 };
 
