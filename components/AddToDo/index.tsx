@@ -40,7 +40,7 @@ const AddToDo = ({
 
     if (value.length >= minValueLength && value.length <= maxValueLength) {
       setCurrentToDo({
-        id: toDoList.length + 1,
+        ...currentToDo,
         value,
       });
     }
