@@ -1,8 +1,8 @@
+import { useEffect, useState } from "react";
 import useLocalStorage from "hooks/useLocalStorage";
 import AddToDo from "components/AddToDo";
 import ToDoListItem from "components/ToDoListItem";
 import { ToDoUnorderedList } from "./styles";
-import { useState } from "react";
 
 export type ToDo = {
   id: number;
@@ -23,14 +23,20 @@ const ToDoList = ({
   searchValue,
 }: IToDoList) => {
   const [toDoList, setToDoList] = useLocalStorage("toDoList", []);
+  const [currentToDoList, setCurrentToDoList] = useState([]);
   const [editToDo, setEditToDo] = useState<ToDo>({
     id: 0,
     value: "",
   });
 
-  const currentToDoList = toDoList?.filter((toDo: ToDo) => {
-    return toDo.value.toLowerCase().includes(searchValue.toLowerCase());
-  });
+  useEffect(() => {
+    if (toDoList.length > 0) {
+      const currentToDoList = toDoList?.filter((toDo: ToDo) => {
+        return toDo.value.toLowerCase().includes(searchValue.toLowerCase());
+      });
+      setCurrentToDoList(currentToDoList);
+    }
+  }, [toDoList, searchValue]);
 
   const handleEditToDo = (id: number, value: string) => {
     setEditToDo({
@@ -49,25 +55,29 @@ const ToDoList = ({
   };
 
   return (
-    <ToDoUnorderedList>
-      {addToDo && (
-        <AddToDo
-          editToDo={editToDo}
-          handleCloseAddToDo={handleCloseAddToDo}
-          setToDoList={setToDoList}
-          toDoList={toDoList}
-        />
+    <>
+      {currentToDoList?.length > 0 && (
+        <ToDoUnorderedList>
+          {addToDo && (
+            <AddToDo
+              editToDo={editToDo}
+              handleCloseAddToDo={handleCloseAddToDo}
+              setToDoList={setToDoList}
+              toDoList={toDoList}
+            />
+          )}
+          {currentToDoList?.map(({ id, value }) => (
+            <ToDoListItem
+              key={id}
+              deleteToDo={deleteToDo}
+              handleEditToDo={handleEditToDo}
+              id={id}
+              text={value}
+            />
+          ))}
+        </ToDoUnorderedList>
       )}
-      {currentToDoList?.map(({ id, value }) => (
-        <ToDoListItem
-          key={id}
-          deleteToDo={deleteToDo}
-          handleEditToDo={handleEditToDo}
-          id={id}
-          text={value}
-        />
-      ))}
-    </ToDoUnorderedList>
+    </>
   );
 };
 
